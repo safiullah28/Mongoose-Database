@@ -98,11 +98,21 @@ const person = new Person({
 //fruit.save();
 
 // Updating the data in database
-Fruits.updateOne({ _id: "66c9f2223faf187b0af5ea2d" }, { name: "Peach" })
+// Fruits.updateOne({ _id: "66c9f2223faf187b0af5ea2d" }, { name: "Peach" })
+//     .then(() => {
+//         console.log("Updated Successfully");
+//         mongoose.connection.close();
+//     })
+//     .catch((error) => {
+//         console.error("Error updating the data", error);
+//     });
+
+// Deleting the data from database
+Fruits.deleteOne({ _id: "66c9f2223faf187b0af5ea2d" })
     .then(() => {
-        console.log("Updated Successfully");
+        console.log("Deleted Successfully");
         mongoose.connection.close();
     })
     .catch((error) => {
-        console.error("Error updating the data", error);
+        console.error("Error deleting the data", error);
     });
