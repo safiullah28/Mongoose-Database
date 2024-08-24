@@ -50,15 +50,24 @@ const Fruits = mongoose.model("Fruits", fruitSchema);
 //fruit.save();
 
 //  Initialized new database Person in the database fruits db
+// const personSchema = new mongoose.Schema({
+//     name: String,
+//     age: Number,
+// });
+
+//Building a relation between fruit and person by favorite fruit
 const personSchema = new mongoose.Schema({
     name: String,
     age: Number,
+    fvrtfruit: fruitSchema,
 });
+
 const Person = mongoose.model("Person", personSchema);
-const person = new Person({
-    name: "John Doe",
-    age: 30,
-});
+
+// const person = new Person({
+//     name: "John Doe",
+//     age: 30,
+// });
 //save in database person
 //person.save();
 
@@ -108,11 +117,43 @@ const person = new Person({
 //     });
 
 // Deleting the data from database
-Fruits.deleteOne({ _id: "66c9f2223faf187b0af5ea2d" })
+// Fruits.deleteOne({ _id: "66c9f2223faf187b0af5ea2d" })
+//     .then(() => {
+//         console.log("Deleted Successfully");
+//         mongoose.connection.close();
+//     })
+//     .catch((error) => {
+//         console.error("Error deleting the data", error);
+//     });
+
+//Favorite fruit and person Relation
+// const pineapple = new Fruits({
+//     name: "Pineapple",
+//     rating: 9,
+//     review: "Great fruit!",
+// });
+// pineapple.save();
+
+// const person = new Person({
+//     name: "Safi",
+//     age: 21,
+//     fvrtfruit: pineapple,
+// });
+// person.save();
+
+//Updating John Doe person
+
+const mango = new Fruits({
+    name: "mango",
+    rating: 9,
+    review: "Great fruit!",
+});
+mango.save();
+
+Person.updateOne({ name: "John Doe" }, { fvrtfruit: mango })
     .then(() => {
-        console.log("Deleted Successfully");
-        mongoose.connection.close();
+        console.log("Updated person successfully");
     })
     .catch((error) => {
-        console.error("Error deleting the data", error);
+        console.error("Error updating person : ", error);
     });
