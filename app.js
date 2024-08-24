@@ -30,7 +30,7 @@ const fruitSchema = new mongoose.Schema({
     // data validation
     name: {
         type: String,
-        required: [true, "Please cehck your name"],
+        required: [true, "Please check your name"],
     },
     //
     rating: {
@@ -49,6 +49,7 @@ const Fruits = mongoose.model("Fruits", fruitSchema);
 
 //fruit.save();
 
+//  Initialized new database Person in the database fruits db
 const personSchema = new mongoose.Schema({
     name: String,
     age: Number,
@@ -58,15 +59,17 @@ const person = new Person({
     name: "John Doe",
     age: 30,
 });
-
+//save in database person
 //person.save();
 
-const banana = new Fruits({
-    // name: "Guava",
-    rating: 9,
-    review: "Decent fruit!",
-});
-banana.save();
+//Sending data with no name but required
+// const banana = new Fruits({
+//     // name: "Guava",
+//     rating: 9,
+//     review: "Decent fruit!",
+// });
+// banana.save();
+
 // const apple = new Fruits({
 //     name: "Apple",
 //     rating: 8,
@@ -79,8 +82,10 @@ banana.save();
 // });
 // Fruits.insertMany([banana, apple, Orange]);
 
+// finding the data in database
 // Fruits.find()
 //     .then((fruits) => {
+// Showing the name of the fruits in database
 //         fruits.forEach((fruit) => {
 //             console.log(`Name : ${fruit.name}`);
 //         });
@@ -91,6 +96,13 @@ banana.save();
 //     });
 
 //fruit.save();
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+
+// Updating the data in database
+Fruits.updateOne({ _id: "66c9f2223faf187b0af5ea2d" }, { name: "Peach" })
+    .then(() => {
+        console.log("Updated Successfully");
+        mongoose.connection.close();
+    })
+    .catch((error) => {
+        console.error("Error updating the data", error);
+    });
